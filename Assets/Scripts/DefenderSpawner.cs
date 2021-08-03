@@ -10,7 +10,7 @@ public class DefenderSpawner : MonoBehaviour
     {
         Debug.Log("Trying to create " + defender);
         if (!defender) return;
-        SpawnDefender(GetSquareClicked());
+        AttemptToPlaceDefenderAt(GetSquareClicked());
     }
 
     public void SetSelectedDefender(Defender defenderToSelect)
@@ -25,6 +25,18 @@ public class DefenderSpawner : MonoBehaviour
         Vector2 gridPos = SnapToGrid(worldPos);
         Debug.Log("clickPos: " + clickPos + ", worldPos: " + worldPos + ", gridPos: " + gridPos);
         return gridPos;
+    }
+
+    private void AttemptToPlaceDefenderAt(Vector2 gridPos)
+    {
+        var StarDisplay = FindObjectOfType<StarDisplay>();
+        int defenderCost = defender.GetStarCost();
+        // if we have enough stars, spawn the defender and spend the stars
+        if (StarDisplay.HaveEnoughStars(defenderCost))
+        {
+            SpawnDefender(gridPos);
+            StarDisplay.SpendStars(defenderCost);
+        }
     }
 
     private Vector2 SnapToGrid(Vector2 rawWorldPos)
