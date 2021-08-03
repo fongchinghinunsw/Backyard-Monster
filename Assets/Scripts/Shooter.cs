@@ -30,7 +30,6 @@ public class Shooter : MonoBehaviour
     {
         if (IsAttackerInLane())
         {
-            Debug.Log("I saw you Attacker!");
             animator.SetBool("isAttacking", true);
         }
         else
