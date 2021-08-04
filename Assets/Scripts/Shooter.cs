@@ -22,6 +22,7 @@ public class Shooter : MonoBehaviour
         projectileParent = GameObject.Find(PROJECTILE_PARENT_NAME);
         if (!projectileParent)
         {
+            // create an object in the base level
             projectileParent = new GameObject(PROJECTILE_PARENT_NAME);
         }
     }
